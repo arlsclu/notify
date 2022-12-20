@@ -1,3 +1,2 @@
-# notify
-
-notify pkg using wecom
+# notifier
+for notify
