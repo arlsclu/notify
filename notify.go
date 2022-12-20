@@ -33,32 +33,24 @@ func init() {
 
 type WeNotifier struct {
 	token string
-	msg   string
 }
 
 // new  instance
-func NewWeNotifier(msg string) *WeNotifier {
-	return &WeNotifier{msg: msg}
-}
-
-var defaultNotifier = NewWeNotifier("ping")
-
-// wrapper
-func Send() error {
-	return defaultNotifier.Send()
+func NewWeNotifier() *WeNotifier {
+	return &WeNotifier{}
 }
 
 // send the msg
-func (wn *WeNotifier) Send() error {
+func (wn *WeNotifier) Send(msg string) error {
 
 	//if  not inited  , then  fresh token
 	if wn.token == "" {
 		wn.freshToken()
 	}
-	if err := wn.send(); err != nil {
+	if err := wn.send(msg); err != nil {
 		if err == errExpiredToken {
 			wn.freshToken()
-			wn.send()
+			wn.send(msg)
 		}
 		return err
 	}
@@ -66,7 +58,7 @@ func (wn *WeNotifier) Send() error {
 }
 
 // doing actural send thing
-func (wn *WeNotifier) send() error {
+func (wn *WeNotifier) send(msg string) error {
 	fmt.Println("like sent")
 	return nil
 	u := fmt.Sprintf(sendURL, wn.token)
@@ -81,7 +73,7 @@ func (wn *WeNotifier) send() error {
 		"safe":0
 	 }
 `
-	s = fmt.Sprintf(s, wn.msg)
+	s = fmt.Sprintf(s, msg)
 	var body = bytes.NewBufferString(s)
 	resp, err := http.Post(u, "application/json", body)
 

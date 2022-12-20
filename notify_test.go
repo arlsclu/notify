@@ -10,6 +10,6 @@ import (
 
 func TestSend(t *testing.T) {
 	msg := time.Now().GoString()
-	n := notify.NewWeNotifier(fmt.Sprintf("this is content %s ", msg))
-	n.Send()
+	n := notify.NewWeNotifier()
+	n.Send(fmt.Sprintf("this is content %s ", msg))
 }
