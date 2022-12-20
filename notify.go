@@ -64,8 +64,6 @@ func (wn *WeNotifier) Send(msg string) error {
 
 // doing actural send thing
 func (wn *WeNotifier) send(msg string) error {
-	fmt.Println("like sent")
-	return nil
 	u := fmt.Sprintf(sendURL, wn.token)
 	s := `
 	{
