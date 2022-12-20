@@ -19,6 +19,7 @@ const (
 )
 
 func init() {
+	viper.AutomaticEnv()
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")

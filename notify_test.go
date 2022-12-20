@@ -1,15 +1,20 @@
-package notify_test
+package notify
 
 import (
 	"fmt"
+	"log"
 	"testing"
 	"time"
-
-	"github.com/arlsclu/notify"
 )
 
 func TestSend(t *testing.T) {
 	msg := time.Now().GoString()
-	n := notify.NewWeNotifier()
+	n := NewWeNotifier()
 	n.Send(fmt.Sprintf("this is content %s ", msg))
+}
+
+func TestConfig(t *testing.T) {
+	if corpID == "" || corpSecret == "" {
+		log.Fatal("empty notify config")
+	}
 }
