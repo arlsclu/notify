@@ -27,8 +27,12 @@ func init() {
 		panic(fmt.Errorf("fatal error config file: %w", err))
 	}
 	log.Printf("reading configi file success: %s ", viper.GetString("name"))
-	corpID = viper.GetString("corpID")
-	corpSecret = viper.GetString("corpSecret")
+	corpID = viper.GetString("CORPID")
+	corpSecret = viper.GetString("CORPSECRET")
+
+	if corpID == "" || corpSecret == "" {
+		log.Fatal("empty notify config")
+	}
 }
 
 type WeNotifier struct {
